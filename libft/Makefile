@@ -6,7 +6,7 @@
 #    By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 11:02:51 by jjacobi           #+#    #+#              #
-#    Updated: 2017/01/27 17:52:19 by jjacobi          ###   ########.fr        #
+#    Updated: 2017/02/07 17:15:59 by jjacobi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ RED			= \033[31m
 DEFAULT		= \033[37m
 
 PROBAR		=\
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
 
 ifeq ($(shell uname),Darwin)
 	ECHO = echo
@@ -70,7 +70,7 @@ $(NAME): $(LIBFT_OBJS) $(PRINTF_OBJS)
 
 %.o: 
 	$(eval COUNTER=$(shell echo $$(($(COUNTER)+1))))
-	@printf \\r%-80.$(COUNTER)s\\c\\033 $(PROBAR)
+	@printf \\r%-81.$(COUNTER)s\\c\\033 $(PROBAR)
 	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c) -I $(H_DIR)
 
 clean:
