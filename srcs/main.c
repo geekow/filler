@@ -27,20 +27,6 @@ int		logstr(char *str) {
 	return (0);
 }
 
-void printMapInfos(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	logstr("Height : ");
-	logstr(ft_itoa(map->mHeight));
-	logstr("Width : ");
-	logstr(ft_itoa(map->mWidth));
-	logstr("---MAP---");
-	while (map->map[i])
-		logstr(map->map[i]);
-}
-
 char	get_player_info()
 {
 	int		i;
@@ -59,19 +45,19 @@ char	get_player_info()
 	return (-1);
 }
 
-int		main(int ac, char **av)
+int		main()
 {
 	t_map	map;
 	char	playerChar;
 
+
+	get_map(&map);
 	if ((playerChar = get_player_info()) < 0)
 		return (-1);
-	logstr("DUMBIE");
-	while (get_map(&map) > -1) {
-		logstr("DUMBIE");
-		// if (solve(playerChar, map) == -1)
+	while (get_map(&map) > -1 && get_piece(&map) > -1)
+	{
+        // if (solve(playerChar, map) == -1)
 		// 	return (-1);
-		printMapInfos(&map);
 	}
 	return (0);
 }

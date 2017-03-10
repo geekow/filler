@@ -6,7 +6,7 @@
 #    By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 13:04:48 by jjacobi           #+#    #+#              #
-#    Updated: 2017/03/09 23:02:35 by jjacobi          ###   ########.fr        #
+#    Updated: 2017/03/10 03:17:50 by jjacobi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= jjacobi.filler
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC_FILES   = main.c get_map.c
+SRC_FILES   = main.c get_map.c get_piece.c
 OBJ			= $(SRC_FILES:.c=.o)
 
 H_DIRS		= -I ./includes -I ./libft/includes

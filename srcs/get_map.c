@@ -38,12 +38,12 @@ int parse_map_tab(t_map *map)
 
     count = 0;
     lineMapLen = 4 + map->mWidth;
-    if ((map->map = malloc(sizeof(char) * (map->mHeight + 1))) == NULL)
+    if ((map->map = malloc(sizeof(char *) * (map->mHeight + 1))) == NULL)
         return (-1);
     map->map[map->mHeight] = NULL;
-    while(get_next_line(0, &lineMap))
+    while(count < map->mHeight && get_next_line(0, &lineMap) > 0)
     {
-        if (ft_strlen(lineMap) != lineMapLen)
+        if ((int)ft_strlen(lineMap) != lineMapLen)
             return (-1);
         if((map->map[count] = ft_strdup(lineMap + 4)) == NULL)
             return (-1);
@@ -62,6 +62,7 @@ int parse_map(t_map *map)
     if (parse_map_header(map) == -1)
         return (-1);
     get_next_line(0, &useless);
+    free(useless);
     if (parse_map_tab(map) == -1)
         return (-1);
     return (0);
@@ -71,7 +72,5 @@ int get_map(t_map *map)
 {
     if (parse_map(map) == -1)
         return (-1);
-    // if (parse_piece(map) == -1)
-    //     return (-1);
     return (0);
 }

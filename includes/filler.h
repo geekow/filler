@@ -16,5 +16,6 @@
 #include "filler_map.h"
 
 int get_map(t_map *map);
+int get_piece(t_map *map);
 
 #endif
