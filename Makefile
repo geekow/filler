@@ -6,7 +6,7 @@
 #    By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 13:04:48 by jjacobi           #+#    #+#              #
-#    Updated: 2017/02/07 13:04:50 by jjacobi          ###   ########.fr        #
+#    Updated: 2017/03/09 23:02:35 by jjacobi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= jjacobi.filler
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC_FILES   = main.c
+SRC_FILES   = main.c get_map.c
 OBJ			= $(SRC_FILES:.c=.o)
 
 H_DIRS		= -I ./includes -I ./libft/includes
@@ -37,7 +37,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(ECHO) "$(DEFAULT)"
 	@($(MAKE) -C $(LIBFT_PATH))
-	@$(CC) $(FLAGS) -o $@ $< $(LIBFT_PATH)/libft.a $(H_DIRS)
+	@$(CC) $(FLAGS) -o $@ $^ $(LIBFT_PATH)/libft.a $(H_DIRS)
 	@$(ECHO) "$(GREEN)$(NAME)$(DEFAULT) created."
 
 %.o: $(SRC_FOLDER)/%.c
