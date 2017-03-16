@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/09 21:12:00 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/03/16 03:03:08 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int		main()
 	t_map	map;
 	char	playerChar;
 
-
-	get_map(&map);
 	if ((playerChar = get_player_info()) < 0)
 		return (-1);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
