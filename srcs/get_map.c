@@ -6,71 +6,73 @@
 /*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:12:07 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/09 21:12:08 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/03/16 14:33:42 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler_map.h"
 #include "libft.h"
 
-int parse_map_header(t_map *map)
+int	parse_map_header(t_map *map)
 {
-    char    *header;
+	char	*header;
 
-    get_next_line(0, &header);
-    if (ft_strlen(header) < 12)
-        return (-1);
-    if (ft_memcmp(header, "Plateau ", 8 * sizeof(char)))
-        return (-1);
-    map->mHeight = ft_atoi(header + (8 * sizeof(char)));
-    map->mWidth = ft_atoi(header + (9 + ft_strlen(ft_itoa(map->mHeight)))
-                    * sizeof(char));
-    if (map->mHeight < 1 || map->mWidth < 1)
-        return (-1);
-    return (0);
+	if (1 != get_next_line(0, &header))
+		return (-1);
+	if (ft_strlen(header) < 12)
+		return (-1);
+	if (ft_memcmp(header, "Plateau ", 8 * sizeof(char)))
+		return (-1);
+	map->mheight = ft_atoi(header + (8 * sizeof(char)));
+	map->mwidth = ft_atoi(header + (9 + ft_strlen(ft_itoa(map->mheight)))
+			* sizeof(char));
+	if (map->mheight < 1 || map->mwidth < 1)
+		return (-1);
+	return (0);
 }
 
-int parse_map_tab(t_map *map)
+int	parse_map_tab(t_map *map)
 {
-    int     count;
-    int     lineMapLen;
-    char    *lineMap;
+	int		count;
+	int		linemaplen;
+	char	*linemap;
 
-    count = 0;
-    lineMapLen = 4 + map->mWidth;
-    if ((map->map = malloc(sizeof(char *) * (map->mHeight + 1))) == NULL)
-        return (-1);
-    map->map[map->mHeight] = NULL;
-    while(count < map->mHeight && get_next_line(0, &lineMap) > 0)
-    {
-        if ((int)ft_strlen(lineMap) != lineMapLen)
-            return (-1);
-        if((map->map[count] = ft_strdup(lineMap + 4)) == NULL)
-            return (-1);
-        free(lineMap);
-        count++;
-    }
-    if (count != map->mHeight)
-        return (-1);
-    return (0);
+	count = 0;
+	linemaplen = 4 + map->mwidth;
+	if ((map->map = malloc(sizeof(char *) * (map->mheight + 1))) == NULL)
+		return (-1);
+	map->map[map->mheight] = NULL;
+	while (count < map->mheight && get_next_line(0, &linemap) > 0)
+	{
+		if ((int)ft_strlen(linemap) != linemaplen)
+			return (-1);
+		if ((map->map[count] = ft_strdup(linemap + 4)) == NULL)
+			return (-1);
+		free(linemap);
+		count++;
+	}
+	if (count != map->mheight)
+		return (-1);
+	return (0);
 }
 
-int parse_map(t_map *map)
+int	parse_map(t_map *map)
 {
-    char    *useless;
+	char	*useless;
 
-    if (parse_map_header(map) == -1)
-        return (-1);
-    get_next_line(0, &useless);
-    free(useless);
-    if (parse_map_tab(map) == -1)
-        return (-1);
-    return (0);
+	if (parse_map_header(map) == -1)
+		return (-1);
+	if (1 != get_next_line(0, &useless))
+		return (-1);
+	free(useless);
+	if (parse_map_tab(map) == -1)
+		return (-1);
+	return (0);
 }
 
-int get_map(t_map *map)
+int	get_map(t_map *map)
 {
-    if (parse_map(map) == -1)
-        return (-1);
-    return (0);
+	if (parse_map(map) == -1)
+		return (-1);
+	return (0);
 }
