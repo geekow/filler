@@ -13,11 +13,11 @@
 #ifndef FILLER_MAP_H
 # define FILLER_MAP_H
 
-typedef struct	s_piece
+typedef struct	s_coord
 {
 	int		x;
 	int		y;
-}				t_piece;
+}				t_coord;
 
 typedef	struct	s_map
 {
@@ -25,9 +25,10 @@ typedef	struct	s_map
 	int		mwidth;
 	int		pheight;
 	int		pwidth;
+	char	player;
 	char	**map;
 	char	**piece;
-	t_piece	*pcoord;
+	t_coord	*pcoord;
 }				t_map;
 
 #endif

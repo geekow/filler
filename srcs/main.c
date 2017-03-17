@@ -36,9 +36,8 @@ char	get_player_info(void)
 int		main(void)
 {
 	t_map	map;
-	char	playerchar;
 
-	if ((playerchar = get_player_info()) < 0)
+	if ((map.player = get_player_info()) < 0)
 		return (-1);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{

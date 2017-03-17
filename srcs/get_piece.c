@@ -62,7 +62,7 @@ int	save_piece(t_map *map)
 
 	k = 0;
 	i = 0;
-	if ((map->pcoord = malloc(sizeof(t_piece*) *
+	if ((map->pcoord = malloc(sizeof(t_coord*) *
 					(map->pheight * map->pwidth))) == NULL)
 		return (-1);
 	while (map->piece[i])
