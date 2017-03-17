@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   try_place.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 14:58:18 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:58:20 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/03/17 10:12:52 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,15 @@ int try_on_pos(t_map *map, t_coord *piece, t_coord *coord)
 
     c = 0;
     i = 0;
-//     if (map->map[coord->y + piece[i].y][coord->x + piece[i].y] != map->player
-// && map->map[coord->y + piece[i].y][coord->x + piece[i].y] != map->player - 32)
-//         return (-1);
     while (piece[i].x != -1)
     {
         if (coord->y + piece[i].y >= map->mheight ||
             coord->x + piece[i].x >= map->mwidth)
             return (-1);
-        if (map->player == map->map[coord->y + piece[i].y][coord->x + piece[i].y]
-        || map->player - 32 == map->map[coord->y + piece[i].y][coord->x + piece[i].y])
+        if (map->player == map->map[coord->y + piece[i].y][coord->x + piece[i].x]
+        || map->player - 32 == map->map[coord->y + piece[i].y][coord->x + piece[i].x])
             c++;
-        else if (map->map[coord->y + piece[i].y][coord->x + piece[i].y] != '.')
+        else if (map->map[coord->y + piece[i].y][coord->x + piece[i].x] != '.')
             return (-1);
         i++;
     }
@@ -97,9 +94,9 @@ int main()
     map.map = malloc(sizeof(char *) * (map.mheight + 1));
     piece = malloc(sizeof(t_coord*) * 5);
     map.map[5] = NULL;
-        map.map[0] = ft_strdup("X....");
-        map.map[1] = ft_strdup(".OO..");
-        map.map[2] = ft_strdup("..x..");
+        map.map[0] = ft_strdup("X.xx.");
+        map.map[1] = ft_strdup(".....");
+        map.map[2] = ft_strdup(".....");
         map.map[3] = ft_strdup(".....");
         map.map[4] = ft_strdup(".....");
 
@@ -120,7 +117,15 @@ int main()
     map.player = 'x';
 
     result = find_next_possible_pos(&coord, piece, &map);
+    if (result == NULL)
+    {
+      ft_printf("NO solution");
+      return (0);
+    }
     ft_printf("Result pos x : %d\n", result->x);
     ft_printf("Result pos y : %d\n", result->y);
+
+    //ft_printf("Function result: %d\n", try_on_pos(&map, piece, &coord));
+
     return (0);
 }
