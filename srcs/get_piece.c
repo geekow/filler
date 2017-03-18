@@ -62,7 +62,7 @@ int	save_piece(t_map *map)
 
 	k = 0;
 	i = 0;
-	if ((map->pcoord = malloc(sizeof(t_coord*) *
+	if ((map->pcoords = malloc(sizeof(t_coord*) *
 					(map->pheight * map->pwidth))) == NULL)
 		return (-1);
 	while (map->piece[i])
@@ -72,14 +72,14 @@ int	save_piece(t_map *map)
 		{
 			if (map->piece[i][j] == '*')
 			{
-				map->pcoord[k].x = j;
-				map->pcoord[k++].y = i;
+				map->pcoords[k].x = j;
+				map->pcoords[k++].y = i;
 			}
 			j++;
 		}
 		i++;
 	}
-	map->pcoord[k].x = -1;
+	map->pcoords[k].x = -1;
 	return (0);
 }
 

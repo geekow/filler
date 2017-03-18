@@ -12,8 +12,8 @@
 
 #include "libft.h"
 #include "get_next_line.h"
-#include "filler_map.h"
 #include "filler.h"
+#include "ft_printf.h"
 
 char	get_player_info(void)
 {
@@ -33,16 +33,29 @@ char	get_player_info(void)
 	return (-1);
 }
 
+#include "fcntl.h"
+
 int		main(void)
 {
 	t_map	map;
+	char	player;
+	t_coord	*result;
+	t_coord	overlap;
 
-	if ((map.player = get_player_info()) < 0)
+	int	fd;
+	fd = open("/nfs/2017/j/jjacobi/Projects/filler_ressources/log", O_RDWR|O_CREAT, 0777);
+
+	if ((player = get_player_info()) < 0)
 		return (-1);
+	result = (t_coord*)malloc(sizeof(t_coord*) * 1);
+	result->x = 0;
+	result->y = 0;
+	ft_putendl_fd("log", fd);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{
-		// if (solve(playerChar, map) == -1)
-		// 	return (-1);
+		result = find_next_possible_pos(result, &map, player, &overlap);
+		ft_printf("%d %d\n", result->x, result->y);
 	}
+	close(fd);
 	return (0);
 }

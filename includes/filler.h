@@ -15,7 +15,10 @@
 
 # include "filler_map.h"
 
-int	get_map(t_map *map);
-int	get_piece(t_map *map);
+int 	get_map(t_map *map);
+int	    get_piece(t_map *map);
+t_coord *find_next_possible_pos(t_coord *startcoord, t_map *map, char player,
+            t_coord *overlap);
+//int     place_piece();
 
 #endif

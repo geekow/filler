@@ -25,10 +25,9 @@ typedef	struct	s_map
 	int		mwidth;
 	int		pheight;
 	int		pwidth;
-	char	player;
 	char	**map;
 	char	**piece;
-	t_coord	*pcoord;
+	t_coord	*pcoords;
 }				t_map;
 
 #endif
