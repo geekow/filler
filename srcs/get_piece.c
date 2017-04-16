@@ -23,9 +23,8 @@ int	parse_piece_header(t_map *map)
 		return (-1);
 	if (ft_memcmp(header, "Piece ", 5 * sizeof(char)))
 		return (-1);
-	map->pheight = ft_atoi(header + (5 * sizeof(char)));
-	map->pwidth = ft_atoi(header + (6 + ft_strlen(ft_itoa(map->mheight)))
-			* sizeof(char));
+	map->pheight = ft_atoi(header + 6);
+	map->pwidth = ft_atoi(header + (7 + ft_strlen(ft_itoa(map->pheight))));
 	if (map->pheight < 1 || map->pwidth < 1)
 		return (-1);
 	return (0);

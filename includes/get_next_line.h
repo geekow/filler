@@ -18,7 +18,7 @@
 # include <sys/uio.h>
 # include <sys/types.h>
 
-# define BUFF_SIZE 42
+# define BUFF_SIZE 420
 
 typedef	struct	s_data
 {

@@ -42,30 +42,19 @@ int		main(void)
 	t_coord	*result;
 	t_coord	overlap;
 
-	int	fd;
-	fd = open("/Users/jjacobi/Projects/filler/log", O_RDWR|O_CREAT|O_TRUNC, 0777);
+	// int	fd;
+	// fd = open("/Users/jjacobi/Projects/filler/log", O_RDWR|O_CREAT|O_TRUNC, 0777);
 
 	if ((player = get_player_info()) < 0)
 		return (-1);
 	result = (t_coord*)malloc(sizeof(t_coord*) * 1);
-	ft_putendl_fd("log start", fd);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{
 		result->x = 0;
 		result->y = 0;
-		// if (get_map(&map) == -1)
-		// {
-		// 	ft_dprintf(fd, "ERROR: GET_MAP\n");
-		// 	return (-1);
-		// }
-		// if (get_piece(&map) == -1)
-		// {
-		// 	ft_dprintf(fd, "ERROR: GET_PIECE\n");
-		// 	return (-1);
-		// }
 		result = find_next_possible_pos(result, &map, player, &overlap);
 		ft_printf("%d %d\n", result->y, result->x);
 	}
-	close(fd);
+	// close(fd);
 	return (0);
 }
