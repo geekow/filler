@@ -58,7 +58,7 @@ static int	extend_content(t_data *data)
 	free(data->content);
 	free(str);
 	data->content = result;
-	if (i < BUFF_SIZE && !ft_strchr(data->content, '\n'))
+	if (i == 0 && !ft_strchr(data->content, '\n'))
 		return (0);
 	else
 		return (1);

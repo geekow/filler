@@ -24,7 +24,7 @@ int	parse_piece_header(t_map *map)
 	if (ft_memcmp(header, "Piece ", 5 * sizeof(char)))
 		return (-1);
 	map->pheight = ft_atoi(header + (5 * sizeof(char)));
-	map->pwidth = ft_atoi(header + (5 + ft_strlen(ft_itoa(map->mheight)))
+	map->pwidth = ft_atoi(header + (6 + ft_strlen(ft_itoa(map->mheight)))
 			* sizeof(char));
 	if (map->pheight < 1 || map->pwidth < 1)
 		return (-1);
@@ -63,7 +63,7 @@ int	save_piece(t_map *map)
 	k = 0;
 	i = 0;
 	if ((map->pcoords = malloc(sizeof(t_coord*) *
-					(map->pheight * map->pwidth))) == NULL)
+					((map->pheight * map->pwidth) + 1))) == NULL)
 		return (-1);
 	while (map->piece[i])
 	{

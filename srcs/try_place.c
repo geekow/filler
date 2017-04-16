@@ -12,7 +12,6 @@
 
 #include "filler_map.h"
 #include "libft.h"
-#include "ft_printf.h"
 
 int try_on_pos(t_map *map, t_coord *coord, char player, t_coord *overlap)
 {
@@ -66,7 +65,7 @@ t_coord *find_next_possible_pos(t_coord *startcoord, t_map *map, char player,
         coord.x = 0;
         coord.y += 1;
     }
-    return (NULL);
+    return (startcoord);
 }
 
 // int main()

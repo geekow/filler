@@ -21,11 +21,12 @@ int	parse_map_header(t_map *map)
 		return (-1);
 	if (ft_strlen(header) < 12)
 		return (-1);
-	if (ft_memcmp(header, "Plateau ", 8 * sizeof(char)))
-		return (-1);
-	map->mheight = ft_atoi(header + (8 * sizeof(char)));
-	map->mwidth = ft_atoi(header + (9 + ft_strlen(ft_itoa(map->mheight)))
+	if (!ft_memcmp(header, "Plateau ", 8 * sizeof(char)))
+	{
+		map->mheight = ft_atoi(header + (8 * sizeof(char)));
+		map->mwidth = ft_atoi(header + (9 + ft_strlen(ft_itoa(map->mheight)))
 			* sizeof(char));
+	}
 	if (map->mheight < 1 || map->mwidth < 1)
 		return (-1);
 	return (0);
