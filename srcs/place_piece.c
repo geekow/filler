@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/17 20:19:22 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/17 20:25:40 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ score = 0;
   if (find_next_possible_pos(&coord, map, player, &myresult) == NULL)
     return (-1);
   score = calc_score(map, player, &myresult);
-  if (score > place_piece(map, player, &coord, result))
+  if (score >= place_piece(map, player, &coord, result))
     *result = myresult;
   return (score);
 }
