@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:31:34 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:30:00 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ int		main(void)
 {
 	t_map	map;
 	char	player;
-	t_coord	*result;
-	t_coord	overlap;
+	t_coord	*start;
+	t_coord result;
 
-	// int	fd;
-	// fd = open("/Users/jjacobi/Projects/filler/log", O_RDWR|O_CREAT|O_TRUNC, 0777);
+	int	fd;
+	fd = open("/Users/jjacobi/Projects/filler/log", O_RDWR|O_CREAT|O_TRUNC, 0777);
 
 	if ((player = get_player_info()) < 0)
 		return (-1);
-	result = (t_coord*)malloc(sizeof(t_coord*) * 1);
+	start = (t_coord*)malloc(sizeof(t_coord*) * 1);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{
-		result->x = 0;
-		result->y = 0;
-		result = find_next_possible_pos(result, &map, player, &overlap);
-		ft_printf("%d %d\n", result->y, result->x);
+		start->x = -1;
+		start->y = 0;
+		ft_dprintf(fd, "Best scoring: %d\n", place_piece(&map, player, start, &result));
+		ft_printf("%d %d\n", result.y, result.x);
 	}
-	// close(fd);
+	close(fd);
 	return (0);
 }

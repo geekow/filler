@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 22:33:33 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:19:54 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:22:57 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "filler_map.h"
 
-int 	get_map(t_map *map);
-int	    get_piece(t_map *map);
+int     get_map(t_map *map);
+int     get_piece(t_map *map);
 t_coord *find_next_possible_pos(t_coord *startcoord, t_map *map, char player,
-            t_coord *overlap);
-//int     place_piece();
+  t_coord *result);
+int place_piece(t_map *map, char player, t_coord *start, t_coord *result);
 
 #endif
