@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/18 15:12:06 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:42:06 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		main(void)
 	{
 		start->x = -1;
 		start->y = 0;
+		place_piece(&map, player, start, &result);
 		ft_printf("%d %d\n", result.y, result.x);
 	}
 	return (0);
