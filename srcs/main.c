@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/18 16:28:22 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/18 17:51:16 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		main(void)
 		start->x = -1;
 		start->y = 0;
 		if (place_piece(&map, player, start, &result) == -1)
-			ft_printf("%d %d\n", map.mheight - 1, map.mwidth - 1);
+			ft_printf("0 0\n");
 		else
 			ft_printf("%d %d\n", result.y, result.x);
 	}
