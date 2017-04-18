@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 14:58:18 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/18 15:16:29 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 00:28:48 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ int		try_on_pos(t_map *map, t_coord *coord, char player)
 	return (c == 1 ? 0 : -1);
 }
 
+int		min_x_pcoord(t_coord *pcoords)
+{
+	int	i;
+	int	min_x;
+
+	min_x = 2147483647;
+	i = 0;
+	while (pcoords[i].x != -1)
+	{
+		if (pcoords[i].x < min_x)
+			min_x = pcoords->x;
+		i++;
+	}
+	return (min_x);
+}
+
 t_coord	*find_next_possible_pos(t_coord *startcoord, t_map *map, char player,
 		t_coord *result)
 {
@@ -49,7 +65,7 @@ t_coord	*find_next_possible_pos(t_coord *startcoord, t_map *map, char player,
 	{
 		while (coord.x < map->mwidth)
 		{
-			tmp.x = coord.x - map->pcoords[0].x;
+			tmp.x = coord.x - min_x_pcoord(map->pcoords);
 			tmp.y = coord.y - map->pcoords[0].y;
 			if (try_on_pos(map, &tmp, player) == 0)
 			{

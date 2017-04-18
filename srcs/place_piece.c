@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/18 17:48:47 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 00:37:36 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		distance_score(t_map *map, char enemy, t_coord *result)
 	return (distance);
 }
 
-int		connection_score(t_map *map, char enemy, t_coord *result)
+int		side_score(t_map *map, char enemy, t_coord *result)
 {
 	int	i;
 	int	score;
@@ -80,17 +80,45 @@ int		connection_score(t_map *map, char enemy, t_coord *result)
 	return (score);
 }
 
+int		diag_score(t_map *map, char enemy, t_coord *result)
+{
+	int	i;
+	int	score;
+
+	i = -1;
+	score = 0;
+	while (map->pcoords[++i].x != -1)
+	{
+		if (map->pcoords[i].y + result->y - 1 >= 0 && map->pcoords[i].x +
+			result->x - 1 >= 0 && map->map[map->pcoords[i].y + result->y - 1]
+			[map->pcoords[i].x + result->x - 1] == enemy)
+			score++;
+		if (map->pcoords[i].y + result->y - 1 >= 0 && map->pcoords[i].x +
+			result->x + 1 < map->mwidth && map->map[map->pcoords[i].y +
+			result->y - 1][map->pcoords[i].x + result->x + 1] == enemy)
+			score++;
+		if (map->pcoords[i].y + result->y + 1 < map->mheight && map->pcoords[i].
+			x + result->x + 1 < map->mwidth && map->map[map->pcoords[i].y +
+			result->y + 1][map->pcoords[i].x + result->x + 1] == enemy)
+			score++;
+		if (map->pcoords[i].y + result->y + 1 < map->mheight && map->pcoords[i].
+			x + result->x - 1 >= 0 && map->map[map->pcoords[i].y + result->y +
+			1][map->pcoords[i].x + result->x - 1] == enemy)
+			score++;
+	}
+	return (score);
+}
+
 int		calc_score(t_map *map, char player, t_coord *result)
 {
 	int	score;
 
-	score = connection_score(map, (player == 'x' ? 'O' : 'X'), result);
-	score += connection_score(map, (player == 'x' ? 'o' : 'x'), result);
+	if (!result)
+		return (-2147483648);
+	score = side_score(map, (player == 'x' ? 'O' : 'X'), result);
+	score += diag_score(map, (player == 'x' ? 'O' : 'X'), result);
 	if (score == 0)
-	{
 		score -= distance_score(map, (player == 'x' ? 'O' : 'X'), result);
-		score -= distance_score(map, (player == 'x' ? 'o' : 'x'), result);
-	}
 	return (score);
 }
 
@@ -111,7 +139,7 @@ int		place_piece(t_map *map, char player, t_coord *start, t_coord *result)
 	else
 		coord.x += 1;
 	if (find_next_possible_pos(&coord, map, player, &myresult) == NULL)
-		return (-1);
+		return (-2147483648);
 	score = calc_score(map, player, &myresult);
 	tmp = place_piece(map, player, &coord, result);
 	if (score >= tmp)
