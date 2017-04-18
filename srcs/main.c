@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/17 18:30:00 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/18 15:12:06 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,12 @@ char	get_player_info(void)
 	return (-1);
 }
 
-#include "fcntl.h"
-
 int		main(void)
 {
 	t_map	map;
 	char	player;
 	t_coord	*start;
 	t_coord result;
-
-	int	fd;
-	fd = open("/Users/jjacobi/Projects/filler/log", O_RDWR|O_CREAT|O_TRUNC, 0777);
 
 	if ((player = get_player_info()) < 0)
 		return (-1);
@@ -52,9 +47,7 @@ int		main(void)
 	{
 		start->x = -1;
 		start->y = 0;
-		ft_dprintf(fd, "Best scoring: %d\n", place_piece(&map, player, start, &result));
 		ft_printf("%d %d\n", result.y, result.x);
 	}
-	close(fd);
 	return (0);
 }
