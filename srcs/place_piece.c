@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/19 02:51:00 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 04:18:37 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,27 @@ int		diag_score(t_map *map, char enemy, t_coord *result)
 	return (score);
 }
 
+int		leftright_score(t_map *map, t_coord *result)
+{
+	int	i;
+	int	min;
+	int	max;
+
+	i = 0;
+	min = 2147483647;
+	max = 0;
+	while (map->pcoords[i].x != -1)
+	{
+		if (min > result->x + map->pcoords[i].x)
+			min = result->x + map->pcoords[i].x;
+		if (max < result->x + map->pcoords[i].x)
+			max = result->x + map->pcoords[i].x;
+		i++;
+	}
+	max = map->mwidth - max;
+	return (min < max ? max : min);
+}
+
 int		calc_score(t_map *map, char player, t_coord *result)
 {
 	int	score;
@@ -116,7 +137,11 @@ int		calc_score(t_map *map, char player, t_coord *result)
 	score = side_score(map, (player == 'x' ? 'O' : 'X'), result);
 	score += diag_score(map, (player == 'x' ? 'O' : 'X'), result);
 	if (score == 0)
+	{
 		score -= distance_score(map, (player == 'x' ? 'O' : 'X'), result);
+		if (-score < map->mwidth / (2.0 * (map->mwidth / 100.0)))
+			score -= (leftright_score(map, result) * 10);
+	}
 	return (score);
 }
 
