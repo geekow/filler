@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/18 19:05:55 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 02:26:26 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		main(void)
 
 	if ((player = get_player_info()) < 0)
 		return (-1);
+	result.x = 0;
+	result.y = 0;
 	start = (t_coord*)malloc(sizeof(t_coord*) * 1);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{

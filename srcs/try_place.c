@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 14:58:18 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/19 00:28:48 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 03:22:00 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int		try_on_pos(t_map *map, t_coord *coord, char player)
 		if (coord->y + map->pcoords[i].y >= map->mheight ||
 				coord->x + map->pcoords[i].x >= map->mwidth)
 			return (-1);
-		else if (player == map->map[coord->y + map->pcoords[i].y]
-				[coord->x + map->pcoords[i].x] || player - 32 ==
+		if (coord->y + map->pcoords[i].y < 0 ||
+			coord->x + map->pcoords[i].x < 0)
+			return (-1);
+		else if (player - 32 ==
 				map->map[coord->y + map->pcoords[i].y][coord->x +
 				map->pcoords[i].x])
 			c++;

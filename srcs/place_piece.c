@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/19 00:37:36 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 02:51:00 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ int		calc_score(t_map *map, char player, t_coord *result)
 {
 	int	score;
 
-	if (!result)
-		return (-2147483648);
 	score = side_score(map, (player == 'x' ? 'O' : 'X'), result);
 	score += diag_score(map, (player == 'x' ? 'O' : 'X'), result);
 	if (score == 0)
