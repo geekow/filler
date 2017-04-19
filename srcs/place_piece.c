@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/19 04:18:37 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/19 20:06:09 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,21 +127,27 @@ int		leftright_score(t_map *map, t_coord *result)
 		i++;
 	}
 	max = map->mwidth - max;
-	return (min < max ? max : min);
+	return (min < max ? min : max);
 }
 
 int		calc_score(t_map *map, char player, t_coord *result)
 {
 	int	score;
+	int	tmp;
 
 	score = side_score(map, (player == 'x' ? 'O' : 'X'), result);
 	score += diag_score(map, (player == 'x' ? 'O' : 'X'), result);
-	if (score == 0)
-	{
-		score -= distance_score(map, (player == 'x' ? 'O' : 'X'), result);
-		if (-score < map->mwidth / (2.0 * (map->mwidth / 100.0)))
-			score -= (leftright_score(map, result) * 10);
-	}
+	// if (score > 3)
+	tmp = (map->mwidth - leftright_score(map, result));
+	if (score == 0 && tmp < map->mwidth * 0.9)
+		score += tmp;
+	tmp = distance_score(map, (player == 'x' ? 'O' : 'X'), result) * 2;
+	if (tmp > map->mwidth / 3)
+		score -= tmp;
+	else
+		score += tmp;
+	// if (-score < map->mwidth / (2.0 * (map->mwidth / 100.0)))
+	// score -= (leftright_score(map, result) * 10);
 	return (score);
 }
 
