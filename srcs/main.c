@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/19 02:26:26 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/20 21:03:09 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		main(void)
 	start = (t_coord*)malloc(sizeof(t_coord*) * 1);
 	while (get_map(&map) > -1 && get_piece(&map) > -1)
 	{
+		map.max_dist = ft_sqrt(ft_power(map.mwidth, 2) +
+			ft_power(map.mheight, 2));
 		start->x = -1;
 		start->y = 0;
 		if (place_piece(&map, player, start, &result) == -2147483648)

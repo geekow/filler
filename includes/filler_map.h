@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:12:22 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:25:06 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/20 21:00:55 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef	struct	s_map
 	int		mwidth;
 	int		pheight;
 	int		pwidth;
+	int		max_dist;
 	char	**map;
 	char	**piece;
 	t_coord	*pcoords;
