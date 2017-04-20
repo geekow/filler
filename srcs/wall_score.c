@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 20:04:13 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/20 20:52:28 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/20 21:18:46 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ int	calc_distances(t_coord *a, t_coord *b, t_coord *addtob)
 	return (ft_sqrt(resx + resy));
 }
 
+int	calc_set(int score, t_coord *coord, t_coord *pcoord, t_coord *result)
+{
+	int	tmp;
+
+	tmp = calc_distances(coord, pcoord, result);
+	return (tmp < score ? tmp : score);
+}
+
 int	side_wall(t_map *map, char player, t_coord *result)
 {
 	int		i;
 	int		pindex;
-	int		tmp;
 	int		score;
 	t_coord	coord;
 
@@ -39,16 +46,10 @@ int	side_wall(t_map *map, char player, t_coord *result)
 		coord.y = 0;
 		while (i < 2)
 		{
-			coord.x = 0;
-			while (coord.x < map->mwidth)
-			{
+			coord.x = -1;
+			while (coord.x++ < map->mwidth - 1)
 				if (map->map[coord.y][coord.x] == player)
-				{
-					tmp = calc_distances(&coord, &map->pcoords[i], result);
-					score = (tmp < score ? tmp : score);
-				}
-				coord.x++;
-			}
+					score = calc_set(score, &coord, &map->pcoords[i], result);
 			coord.y = map->mheight - 1;
 			i++;
 		}
@@ -61,7 +62,6 @@ int	height_wall(t_map *map, char player, t_coord *result)
 {
 	int		i;
 	int		pindex;
-	int		tmp;
 	int		score;
 	t_coord	coord;
 
@@ -73,16 +73,10 @@ int	height_wall(t_map *map, char player, t_coord *result)
 		coord.x = 0;
 		while (i < 2)
 		{
-			coord.y = 0;
-			while (coord.y < map->mheight)
-			{
+			coord.y = -1;
+			while (coord.y++ < map->mheight - 1)
 				if (map->map[coord.y][coord.x] == player)
-				{
-					tmp = calc_distances(&coord, &map->pcoords[i], result);
-					score = (tmp < score ? tmp : score);
-				}
-				coord.y++;
-			}
+					score = calc_set(score, &coord, &map->pcoords[i], result);
 			coord.x = map->mwidth - 1;
 			i++;
 		}

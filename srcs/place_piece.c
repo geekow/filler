@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:06:29 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/20 21:07:52 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/20 21:29:04 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ int		calc_score(t_map *map, char player, t_coord *result)
 	side = side_score(map, result);
 	distance = distance_score(map, (player == 'x' ? 'O' : 'X'), result);
 	wallscore = wall_score(map, player - 32, result);
-	if (map->max_dist / 10 > side && wallscore > map->max_dist / 5)
+	if (map->max_dist / 8 > side && wallscore > map->max_dist / 4)
 		score = 20 + map->max_dist - side;
 	else
-		score = connections + map->max_dist - distance;
+		score = connections;
+	if (score == 0)
+		score -= distance;
 	return (score);
 }
 
