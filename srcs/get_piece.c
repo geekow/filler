@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_piece.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 12:43:35 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:52:08 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/21 21:30:15 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	parse_piece_header(t_map *map)
 {
 	char	*header;
+	char	*tmp;
 
 	if (1 != get_next_line(0, &header))
 		return (-1);
@@ -24,7 +25,10 @@ int	parse_piece_header(t_map *map)
 	if (ft_memcmp(header, "Piece ", 5 * sizeof(char)))
 		return (-1);
 	map->pheight = ft_atoi(header + 6);
-	map->pwidth = ft_atoi(header + (7 + ft_strlen(ft_itoa(map->pheight))));
+	tmp = ft_itoa(map->pheight);
+	map->pwidth = ft_atoi(header + (7 + ft_strlen(tmp)));
+	free(tmp);
+	free(header);
 	if (map->pheight < 1 || map->pwidth < 1)
 		return (-1);
 	return (0);

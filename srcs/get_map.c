@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:12:07 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/03/16 14:33:42 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/21 21:30:03 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	parse_map_header(t_map *map)
 {
 	char	*header;
+	char	*tmp;
 
 	if (1 != get_next_line(0, &header))
 		return (-1);
@@ -24,8 +25,11 @@ int	parse_map_header(t_map *map)
 	if (!ft_memcmp(header, "Plateau ", 8 * sizeof(char)))
 	{
 		map->mheight = ft_atoi(header + (8 * sizeof(char)));
-		map->mwidth = ft_atoi(header + (9 + ft_strlen(ft_itoa(map->mheight)))
+		tmp = ft_itoa(map->mheight);
+		map->mwidth = ft_atoi(header + (9 + ft_strlen(tmp))
 			* sizeof(char));
+		free(header);
+		free(tmp);
 	}
 	if (map->mheight < 1 || map->mwidth < 1)
 		return (-1);

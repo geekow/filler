@@ -6,7 +6,7 @@
 /*   By: jjacobi <jjacobi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:11:59 by jjacobi           #+#    #+#             */
-/*   Updated: 2017/04/20 21:03:09 by jjacobi          ###   ########.fr       */
+/*   Updated: 2017/04/21 21:32:12 by jjacobi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,27 @@ char	get_player_info(void)
 	if (ft_memcmp("$$$ exec p", input, 10 * sizeof(char)) != 0)
 		return (-1);
 	i = ft_atoi(input + 10);
+	free(input);
 	if (i == 1)
 		return ('o');
 	else if (i == 2)
 		return ('x');
 	return (-1);
+}
+
+void	free_map_content(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->pheight)
+		free(map->piece[i++]);
+	free(map->piece);
+	i = 0;
+	while (i < map->mheight)
+		free(map->map[i++]);
+	free(map->map);
+	free(map->pcoords);
 }
 
 int		main(void)
@@ -55,6 +71,8 @@ int		main(void)
 			ft_printf("0 0\n");
 		else
 			ft_printf("%d %d\n", result.y, result.x);
+		free_map_content(&map);
 	}
+	free(start);
 	return (0);
 }
