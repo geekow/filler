@@ -6,7 +6,7 @@
 #    By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 13:04:48 by jjacobi           #+#    #+#              #
-#    Updated: 2017/04/20 21:19:33 by jjacobi          ###   ########.fr        #
+#    Updated: 2017/04/21 20:42:35 by jjacobi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(ECHO) "$(DEFAULT)"
+	@$(ECHO) "\r$(GREEN) The .o from $(NAME) are compiled.            \
+                                                    $(DEFAULT)"
 	@($(MAKE) -C $(LIBFT_PATH))
 	@$(CC) $(FLAGS) -o $@ $^ $(LIBFT_PATH)/libft.a $(H_DIRS)
 	@$(ECHO) "$(GREEN)$(NAME)$(DEFAULT) created."
@@ -48,10 +49,13 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -rf $(OBJ)
+	@$(ECHO) "All $(RED).o$(DEFAULT) are now deleted for $(NAME)."
 	@($(MAKE) -C $(LIBFT_PATH) $@)
 
 fclean:
 	@rm -rf $(NAME) $(OBJ)
+	@$(ECHO) "All $(RED).o$(DEFAULT) are now deleted for $(NAME)."
+	@$(ECHO) "$(RED)$(NAME)$(DEFAULT) is now deleted."
 	@($(MAKE) -C $(LIBFT_PATH) $@)
 
 re: fclean all

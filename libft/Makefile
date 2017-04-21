@@ -6,7 +6,7 @@
 #    By: jjacobi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 11:02:51 by jjacobi           #+#    #+#              #
-#    Updated: 2017/02/07 17:15:59 by jjacobi          ###   ########.fr        #
+#    Updated: 2017/04/21 20:40:23 by jjacobi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,6 @@ GREEN		= \033[32m
 RED			= \033[31m
 DEFAULT		= \033[37m
 
-PROBAR		=\
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-
 ifeq ($(shell uname),Darwin)
 	ECHO = echo
 else
@@ -69,8 +66,7 @@ $(NAME): $(LIBFT_OBJS) $(PRINTF_OBJS)
 	@$(ECHO) "\n$(GREEN)$(NAME)$(DEFAULT) created."
 
 %.o: 
-	$(eval COUNTER=$(shell echo $$(($(COUNTER)+1))))
-	@printf \\r%-81.$(COUNTER)s\\c\\033 $(PROBAR)
+	@$(ECHO) "\r$(GREEN) Compiling $@                      \c\033[K"
 	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c) -I $(H_DIR)
 
 clean:
